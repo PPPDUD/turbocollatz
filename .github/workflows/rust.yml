@@ -14,7 +14,7 @@ jobs:
     permissions:
      actions: read
      contents: write
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
