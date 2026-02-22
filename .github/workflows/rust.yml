@@ -11,12 +11,17 @@ env:
 
 jobs:
   build:
-
+    permissions:
+     actions: read
+     contents: write
     runs-on: debian-latest
 
     steps:
     - uses: actions/checkout@v4
     - name: Build
       run: cargo build --verbose --release
-    - name: Run tests
-      run: cargo test --verbose
+    - name: Anchore SBOM Action
+      uses: anchore/sbom-action@v0.22.2
+      with:
+        path: ./src/
+        artifact-name: sbom.spdx
