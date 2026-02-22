@@ -11,7 +11,7 @@ Here are some benchmark results on my Ubuntu 25.10 machine with an AMD Ryzen 9 3
 | `time USE_SLOW=true ./turbocollatz 1 50000`    | 0.538 seconds    |
 
 ## Usage
-`./turbocollatz START [END]` (if _END_ is not specified, the steps to verify the conjecture starting at _START_ will be printed to `stdout`).
+`./turbocollatz START [END]` (if _END_ is not specified, the steps to verify the conjecture starting at _START_ until convergence to 1 will be printed to `stdout`).
 
 ### Disbling caching functionality
 By default, `turbocollatz` will dynamically allocate memory when verifying a range in order to speed up calculations. While this can significantly improve performance for smaller ranges, sometimes the cache will get too large and your system will run out of memory.
