@@ -1,0 +1,29 @@
+turbocollatz(1) - verify the Collatz conjecture on your CPU
+=============================================
+
+## SYNOPSIS
+`turbocollatz` <START> [END]
+
+## DESCRIPTION
+
+**turbocollatz** is a fast single-threaded program to verify the Collatz conjecture.
+
+If one argument is provided, `turbocollatz` will print the steps to get to 1 starting at that argument.
+
+If two arguments are provided, then `turbocollatz` will silently verify all numbers from START to END (inclusive) and print out a message with the number of steps performed.
+
+## EXIT STATUS
+If the arguments provided to `turbocollatz` are malformed or cannot be parsed, `turbocollatz` will exit with code 64.
+
+If the operation completes successfully, then `turbocollatz` will exit with code 0.
+
+## EXAMPLES
+Show the verification steps starting from the number 50: turbocollatz 50
+
+Verify numbers 1 through 50: turbocollatz 1 5
+
+
+## ENVIRONMENT
+
+  * `USE_SLOW`:
+    Disables caching for range verification. This helps prevent `turbocollatz` from using large amounts of memory, but it comes at the cost of significantly reducing performance.
