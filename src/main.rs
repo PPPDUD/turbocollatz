@@ -54,7 +54,7 @@ fn main() -> ExitCode {
 
     match args.len() {
         2 => {if string_to_int(args[1].clone())>0 {collatz(string_to_int(args[1].clone()), true, &HashSet::from([1]), false);} else {eprintln!("Bad arguments."); return ExitCode::from(64);}}
-        3 => {println!("Finished in {} steps.", collatz_ranged(string_to_int(args[1].clone()), string_to_int(args[2].clone()), env::var("USE_SLOW").unwrap_or_default() == "true"))},
+        3 => {if string_to_int(args[1].clone())>0 {println!("Finished in {} steps.", collatz_ranged(string_to_int(args[1].clone()), string_to_int(args[2].clone()), env::var("USE_SLOW").unwrap_or_default() == "true"))} else {eprintln!("Bad arguments."); return ExitCode::from(64);}},
         _ => {eprintln!("Bad arguments."); return ExitCode::from(64);}
     }
 
