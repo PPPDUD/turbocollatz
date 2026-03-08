@@ -2,9 +2,13 @@ use std::env;
 use std::process;
 use std::collections::HashSet;
 use std::process::ExitCode;
+#[cfg(feature = "u32")]
+type StepsType = u32;
 
+#[cfg(not(feature = "u32"))]
+type StepsType = i64;
 
-fn string_to_int(input: String) -> i64 {
+fn string_to_int(input: String) -> StepsType {
     match input.parse() {
         Ok(output) => {
             return output;
@@ -16,9 +20,10 @@ fn string_to_int(input: String) -> i64 {
     }
 }
 
-fn collatz(seed: i64, print_steps: bool, known_good: &HashSet<i64>, return_steps: bool) -> Vec<i64> {
-    let mut steps: Vec<i64> = vec!();
-    let mut x = seed;
+fn collatz(seed: StepsType, print_steps: bool, known_good: &HashSet<StepsType>, return_steps: bool) -> Vec<StepsType> {
+    let mut steps: Vec<StepsType> = vec!();
+    let mut x: StepsType = seed;
+
     while !known_good.contains(&x) {
         if x%2==0 {
             x = x/2;
@@ -33,13 +38,11 @@ fn collatz(seed: i64, print_steps: bool, known_good: &HashSet<i64>, return_steps
     return steps;
 }
 
-fn collatz_ranged(start: i64, end: i64, use_slow: bool) -> u32 {
-    let mut known_good:HashSet<i64> = HashSet::from([1]);
+fn collatz_ranged(start: StepsType, end: StepsType, use_slow: bool) -> u32 {
+    let mut known_good:HashSet<StepsType> = HashSet::from([1]);
     let mut total_steps:u32 = 0;
-    //println!("{}", use_slow);
     for i in start..=end {
-        //println!("{}", i);
-        let steps:Vec<i64> = collatz(i, false, &known_good, true);
+        let steps:Vec<StepsType> = collatz(i, false, &known_good, true);
         total_steps += steps.len() as u32;
         if !use_slow {known_good.extend(steps);}
     }
