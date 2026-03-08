@@ -2,11 +2,11 @@ use std::env;
 use std::process;
 use std::collections::HashSet;
 use std::process::ExitCode;
-#[cfg(feature = "u32")]
+#[cfg(not(feature = "u64"))]
 type StepsType = u32;
 
-#[cfg(not(feature = "u32"))]
-type StepsType = i64;
+#[cfg(feature = "u64")]
+type StepsType = u64;
 
 fn string_to_int(input: String) -> StepsType {
     match input.parse() {
@@ -53,7 +53,7 @@ fn main() -> ExitCode {
     let args: Vec<String> = env::args().collect();
 
     match args.len() {
-        2 => {collatz(string_to_int(args[1].clone()), true, &HashSet::from([1]), false);}
+        2 => {if string_to_int(args[1].clone())>0 {collatz(string_to_int(args[1].clone()), true, &HashSet::from([1]), false);} else {eprintln!("Bad arguments."); return ExitCode::from(64);}}
         3 => {println!("Finished in {} steps.", collatz_ranged(string_to_int(args[1].clone()), string_to_int(args[2].clone()), env::var("USE_SLOW").unwrap_or_default() == "true"))},
         _ => {eprintln!("Bad arguments."); return ExitCode::from(64);}
     }
