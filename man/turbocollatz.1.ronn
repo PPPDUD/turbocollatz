@@ -2,28 +2,35 @@ turbocollatz(1) - verify the Collatz conjecture on your CPU
 =============================================
 
 ## SYNOPSIS
-`turbocollatz` <START> [END]
+**turbocollatz** <START> [END]
 
 ## DESCRIPTION
 
 **turbocollatz** is a fast single-threaded program to verify the Collatz conjecture.
 
-If one argument is provided, `turbocollatz` will print the steps to get to 1 starting at that argument.
+If one argument is provided, **turbocollatz** will print the steps to get to 1 starting at that argument.
 
-If two arguments are provided, then `turbocollatz` will silently verify all numbers from START to END (inclusive) and print out a message with the number of steps performed.
+If two arguments are provided, then **turbocollatz** will silently verify all numbers from START to END (inclusive) and print out a message with the number of steps performed.
 
 ## EXIT STATUS
-If the arguments provided to `turbocollatz` are malformed or cannot be parsed, `turbocollatz` will exit with code 64.
+If the arguments provided to **turbocollatz** are malformed or cannot be parsed, **turbocollatz** will exit with code 64.
 
-If the operation completes successfully, then `turbocollatz` will exit with code 0.
+If the operation completes successfully, then **turbocollatz** will exit with code 0.
+
+## ENVIRONMENT
+
+  * `USE_SLOW`:
+    Disables caching for range verification. This helps prevent **turbocollatz** from using large amounts of memory, but it comes at the cost of significantly reducing performance.
+
+## NOTES
+Since version 0.2, **turbocollatz** has used unsigned 32-bit integers for most of its variables by default.
+
+This means that it uses less memory than previous versions, but significantly limits the verification of larger numbers. In the edge cases where the primary **turbocollatz** command experiences an integer overflow, the user can use the **turbocollatz-u64** command, which uses 64-bit unsigned integers.
+
+## CAVEATS
+Historically, **turbocollatz** would get stuck in an infinite loop if you attempted to verify a negative number. Starting with version 0.2, this is no longer the case and the usage of negative numbers as inputs is now considered undefined behavior.
 
 ## EXAMPLES
 Show the verification steps starting from the number 50: turbocollatz 50
 
 Verify numbers 1 through 50: turbocollatz 1 5
-
-
-## ENVIRONMENT
-
-  * `USE_SLOW`:
-    Disables caching for range verification. This helps prevent `turbocollatz` from using large amounts of memory, but it comes at the cost of significantly reducing performance.
