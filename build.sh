@@ -5,7 +5,7 @@ gzip -9 -f man/*.? # gzip the manpages
 mkdir -p dist
 cargo build --release
 mv target/x86_64-unknown-linux-musl/release/turbocollatz dist/turbocollatz
-cargo build --release --features u64
+cargo build --release --features u64-turbocollatz
 mv target/x86_64-unknown-linux-musl/release/turbocollatz dist/turbocollatz-u64
 rm -f dist/turbocollatz.deb
 fpm \
@@ -13,7 +13,7 @@ fpm \
 	-p dist/turbocollatz.deb \
 	--name turbocollatz \
 	--license MIT \
-	--version 0.2.0 \
+	--version 0.3.0 \
 	--architecture amd64 \
 	--description "A package for verifying the Collatz conjecture." \
 	--url "https://github.com/PPPDUD/turbocollatz" \
