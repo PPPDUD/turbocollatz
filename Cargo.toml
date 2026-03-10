@@ -4,4 +4,7 @@ version = "0.3.0"
 edition = "2024"
 
 [dependencies]
-turbocollatz-internal = "0.1.0"
+turbocollatz-internal = "~0.1.1"
+
+[features]
+u64-turbocollatz = ["turbocollatz-internal/u64-turbocollatz"]
