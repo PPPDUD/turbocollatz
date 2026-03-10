@@ -5,8 +5,8 @@ gzip -9 -f man/*.? # gzip the manpages
 mkdir -p dist
 cargo build --release
 mv target/x86_64-unknown-linux-musl/release/turbocollatz dist/turbocollatz
-cargo build --release --features turbocollatz-u64
-mv target/x86_64-unknown-linux-musl/release/turbocollatz dist/turbocollatz-u64
+cargo build --release --features u64-turbocollatz
+mv target/x86_64-unknown-linux-musl/release/turbocollatz dist/u64-turbocollatz
 rm -f dist/turbocollatz.deb
 fpm \
 	-s dir -t deb \
